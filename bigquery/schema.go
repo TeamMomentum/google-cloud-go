@@ -20,7 +20,8 @@ import (
 	"fmt"
 	"reflect"
 
-	"cloud.google.com/go/internal/atomiccache"
+	"github.com/TeamMomentum/google-cloud-go/internal/atomiccache"
+
 	bq "google.golang.org/api/bigquery/v2"
 )
 

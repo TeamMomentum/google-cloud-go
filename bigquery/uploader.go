@@ -19,7 +19,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"cloud.google.com/go/internal/trace"
+	"github.com/TeamMomentum/google-cloud-go/internal/trace"
 	"golang.org/x/net/context"
 	bq "google.golang.org/api/bigquery/v2"
 )

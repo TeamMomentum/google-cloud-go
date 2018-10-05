@@ -307,4 +307,4 @@ These errors can be introspected for more information by type asserting to the r
 		  if e.Code = 409 { ... }
 	}
 */
-package bigquery // import "cloud.google.com/go/bigquery"
+package bigquery // import "github.com/TeamMomentum/google-cloud-go/bigquery"

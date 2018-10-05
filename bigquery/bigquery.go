@@ -22,8 +22,8 @@ import (
 
 	gax "github.com/googleapis/gax-go"
 
-	"cloud.google.com/go/internal"
-	"cloud.google.com/go/internal/version"
+	"github.com/TeamMomentum/google-cloud-go/internal"
+	"github.com/TeamMomentum/google-cloud-go/internal/version"
 
 	"google.golang.org/api/googleapi"
 	"google.golang.org/api/option"

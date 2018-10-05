@@ -24,7 +24,7 @@ import (
 	"time"
 
 	"cloud.google.com/go/civil"
-	"cloud.google.com/go/internal/fields"
+	"github.com/TeamMomentum/google-cloud-go/internal/fields"
 
 	bq "google.golang.org/api/bigquery/v2"
 )

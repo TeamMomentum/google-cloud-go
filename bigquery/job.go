@@ -19,8 +19,8 @@ import (
 	"fmt"
 	"time"
 
-	"cloud.google.com/go/internal"
-	"cloud.google.com/go/internal/trace"
+	"github.com/TeamMomentum/google-cloud-go/internal"
+	"github.com/TeamMomentum/google-cloud-go/internal/trace"
 	gax "github.com/googleapis/gax-go"
 	"golang.org/x/net/context"
 	bq "google.golang.org/api/bigquery/v2"

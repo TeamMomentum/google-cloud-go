@@ -70,7 +70,7 @@ import (
 	"sort"
 	"strings"
 
-	"cloud.google.com/go/internal/atomiccache"
+	"github.com/TeamMomentum/google-cloud-go/internal/atomiccache"
 )
 
 // A Field records information about a struct field.
