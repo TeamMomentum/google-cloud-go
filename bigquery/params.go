@@ -38,14 +38,33 @@ var (
 )
 
 const nullableTagOption = "nullable"
+const omitEmptyTagOption = "omitempty"
 
-func bqTagParser(t reflect.StructTag) (name string, keep bool, other interface{}, err error) {
-	name, keep, opts, err := fields.ParseStandardTag("bigquery", t)
+func jsonTagParser(t reflect.StructTag) (name string, keep bool, other interface{}, err error) {
+	name, keep, opts, err := fields.ParseStandardTag("json", t)
 	if err != nil {
 		return "", false, nil, err
 	}
 	if name != "" && !validFieldName.MatchString(name) {
 		return "", false, nil, errInvalidFieldName
+	}
+	/*for _, opt := range opts {
+		if opt != omitEmptyTagOption {
+			return "", false, nil, fmt.Errorf(
+				"bigquery: invalid tag option %q. The only valid option is %q",
+				opt, nullableTagOption)
+		}
+	}*/
+	return name, keep, opts, nil
+}
+
+func bqTagParser(t reflect.StructTag) (name string, keep bool, other interface{}, err error) {
+	name, keep, opts, err := fields.ParseStandardTag("bigquery", t)
+	if err != nil {
+		return jsonTagParser(t)
+	}
+	if name != "" && !validFieldName.MatchString(name) {
+		return jsonTagParser(t)
 	}
 	for _, opt := range opts {
 		if opt != nullableTagOption {
