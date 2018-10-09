@@ -314,7 +314,7 @@ func inferFieldSchema(rt reflect.Type, nullable bool) (*FieldSchema, error) {
 	case reflect.Float32, reflect.Float64:
 		return &FieldSchema{Required: !nullable, Type: FloatFieldType}, nil
 	default:
-		fmt.Println(rt.Kind().Name + " is UnsupportedFieldType. It was ignored!")
+		fmt.Println(rt.Kind().String() + " is UnsupportedFieldType. It was ignored!")
 		return nil, nil
 		//return nil, errUnsupportedFieldType
 	}
