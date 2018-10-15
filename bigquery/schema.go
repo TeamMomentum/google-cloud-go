@@ -330,7 +330,7 @@ func inferFields(rt reflect.Type) (Schema, error) {
 	for _, field := range fields {
 		var nullable bool
 		for _, opt := range field.ParsedTag.([]string) {
-			if opt == nullableTagOption {
+			if opt == nullableTagOption || opt == omitEmptyTagOption {
 				nullable = true
 				break
 			}
