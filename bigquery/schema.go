@@ -256,11 +256,13 @@ func inferStruct(t reflect.Type) (Schema, error) {
 func inferFieldSchema(rt reflect.Type, nullable bool) (*FieldSchema, error) {
 	// Only []byte and struct pointers can be tagged nullable.
 	if nullable && !(rt == typeOfByteSlice || rt.Kind() == reflect.Ptr && rt.Elem().Kind() == reflect.Struct) {
-		return nil, errBadNullable
+		fmt.Println("got nullable ", rt, " temp ignored.")
+		nullable = false
+		//return nil, errBadNullable
 	}
 	switch rt {
 	case typeOfByteSlice:
-		return &FieldSchema{Required: !nullable, Type: BytesFieldType}, nil
+		return &FieldSchema{Required: false, Type: BytesFieldType}, nil
 	case typeOfGoTime:
 		return &FieldSchema{Required: true, Type: TimestampFieldType}, nil
 	case typeOfDate:
@@ -270,7 +272,7 @@ func inferFieldSchema(rt reflect.Type, nullable bool) (*FieldSchema, error) {
 	case typeOfDateTime:
 		return &FieldSchema{Required: true, Type: DateTimeFieldType}, nil
 	case typeOfRat:
-		return &FieldSchema{Required: !nullable, Type: NumericFieldType}, nil
+		return &FieldSchema{Required: false, Type: NumericFieldType}, nil
 	}
 	if ft := nullableFieldType(rt); ft != "" {
 		return &FieldSchema{Required: false, Type: ft}, nil
@@ -306,13 +308,13 @@ func inferFieldSchema(rt reflect.Type, nullable bool) (*FieldSchema, error) {
 		if err != nil {
 			return nil, err
 		}
-		return &FieldSchema{Required: !nullable, Type: RecordFieldType, Schema: nested}, nil
+		return &FieldSchema{Required: false, Type: RecordFieldType, Schema: nested}, nil
 	case reflect.String:
-		return &FieldSchema{Required: !nullable, Type: StringFieldType}, nil
+		return &FieldSchema{Required: false, Type: StringFieldType}, nil
 	case reflect.Bool:
-		return &FieldSchema{Required: !nullable, Type: BooleanFieldType}, nil
+		return &FieldSchema{Required: false, Type: BooleanFieldType}, nil
 	case reflect.Float32, reflect.Float64:
-		return &FieldSchema{Required: !nullable, Type: FloatFieldType}, nil
+		return &FieldSchema{Required: false, Type: FloatFieldType}, nil
 	default:
 		fmt.Println(rt.Kind().String() + " is UnsupportedFieldType. It was ignored!")
 		return nil, nil

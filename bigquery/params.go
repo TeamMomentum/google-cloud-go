@@ -48,19 +48,20 @@ func jsonTagParser(t reflect.StructTag) (name string, keep bool, other interface
 	if name != "" && !validFieldName.MatchString(name) {
 		return "", false, nil, errInvalidFieldName
 	}
-	/*for _, opt := range opts {
+	for _, opt := range opts {
 		if opt != omitEmptyTagOption {
 			return "", false, nil, fmt.Errorf(
 				"bigquery: invalid tag option %q. The only valid option is %q",
-				opt, nullableTagOption)
+				opt, omitEmptyTagOption)
 		}
-	}*/
+	}
+	fmt.Println(name, keep, opts)
 	return name, keep, opts, nil
 }
 
 func bqTagParser(t reflect.StructTag) (name string, keep bool, other interface{}, err error) {
 	name, keep, opts, err := fields.ParseStandardTag("bigquery", t)
-	if err != nil {
+	if err != nil || name == "" {
 		return jsonTagParser(t)
 	}
 	if name != "" && !validFieldName.MatchString(name) {
@@ -73,6 +74,7 @@ func bqTagParser(t reflect.StructTag) (name string, keep bool, other interface{}
 				opt, nullableTagOption)
 		}
 	}
+	fmt.Println(name, keep, opts)
 	return name, keep, opts, nil
 }
 
